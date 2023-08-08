@@ -305,7 +305,10 @@ contract SL2RD is
         );
 
         // Allows the operator to call transfer without revert
-        if (_shareOperatorRegistry.isOperator(msg.sender)) {
+        if (
+            _shareOperatorRegistry.isOperator(msg.sender) ||
+            msg.sender == owner()
+        ) {
             super._approve(msg.sender, _nextAvailableCommunitySlot);
         }
 
